@@ -16,7 +16,9 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col">
       <Navbar />
-      <Hero />
+      <div id="home">
+        <Hero />
+      </div>
       <MobilitySection />
       <HybridTechnology />
       <div id="products">

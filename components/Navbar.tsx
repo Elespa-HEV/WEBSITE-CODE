@@ -5,10 +5,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ArrowUpRight, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { Button } from "./ui/Button";
-import SpecularButton from "./ui/SpecularButton"; // maybe useful later?
+import SpecularButton from "./ui/SpecularButton";
 
 const NAV_LINKS = [
-  { label: "Home", href: "#" },
+  { label: "Home", href: "#home" },
   { label: "Products", href: "#products" },
   { label: "Technology", href: "#technology-modes" },
   { label: "About", href: "#team" },
@@ -28,6 +28,37 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Intersection Observer for Active Link
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        // Find the visible section with highest intersection ratio
+        const visibleSection = entries.find((entry) => entry.isIntersecting);
+        if (visibleSection) {
+          const targetId = `#${visibleSection.target.id}`;
+          const currentLink = NAV_LINKS.find((link) => link.href === targetId);
+          if (currentLink) {
+            setActiveLink(currentLink.label);
+          }
+        }
+      },
+      {
+        rootMargin: "-100px 0px -40% 0px", // adjust to trigger active state accurately
+        threshold: 0,
+      }
+    );
+
+    NAV_LINKS.forEach((link) => {
+      const id = link.href.replace("#", "");
+      const element = document.getElementById(id);
+      if (element) {
+        observer.observe(element);
+      }
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   // Prevent scroll when mobile menu is open
   useEffect(() => {
     if (isMobileMenuOpen) {
@@ -39,6 +70,26 @@ export default function Navbar() {
       document.body.style.overflow = "";
     };
   }, [isMobileMenuOpen]);
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string, label: string) => {
+    e.preventDefault();
+    setActiveLink(label);
+    setIsMobileMenuOpen(false);
+
+    const targetId = href.replace("#", "");
+    const element = document.getElementById(targetId);
+    
+    if (element) {
+      // 80px offset for the navbar
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - 80;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+    }
+  };
 
   return (
     <>
@@ -69,7 +120,7 @@ export default function Navbar() {
               <div key={link.label} className="relative pb-1">
                 <a
                   href={link.href}
-                  onClick={() => setActiveLink(link.label)}
+                  onClick={(e) => handleNavClick(e, link.href, link.label)}
                   className={`text-[13px] font-medium transition-colors ${
                     activeLink === link.label ? "text-white" : "text-white/70 hover:text-white"
                   }`}
@@ -90,31 +141,33 @@ export default function Navbar() {
           {/* Right Actions */}
           <div className="flex items-center gap-4 z-50">
             <div className="hidden sm:block">
-              {/* @ts-ignore */}
-              <SpecularButton
-                size="sm"
-                radius={999}
-                tint="#ffffff"
-                tintOpacity={0}
-                blur={0}
-                textColor="#ffffff"
-                lineColor="#ffffff"
-                baseColor="#333333"
-                intensity={1}
-                shineSize={30}
-                shineFade={40}
-                thickness={2}
-                speed={0.5}
-                followMouse={true}
-                proximity={250}
-                autoAnimate={false}
-                className="font-medium text-sm !px-6 py-2 group"
-              >
-                <div className="flex items-center">
-                  Join the Movement
-                  <ArrowUpRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </div>
-              </SpecularButton>
+              <a href="https://www.instagram.com/elespa_hev/?hl=en" target="_blank" rel="noopener noreferrer">
+                {/* @ts-ignore */}
+                <SpecularButton
+                  size="sm"
+                  radius={999}
+                  tint="#ffffff"
+                  tintOpacity={0}
+                  blur={0}
+                  textColor="#ffffff"
+                  lineColor="#ffffff"
+                  baseColor="#333333"
+                  intensity={1}
+                  shineSize={30}
+                  shineFade={40}
+                  thickness={2}
+                  speed={0.5}
+                  followMouse={true}
+                  proximity={250}
+                  autoAnimate={false}
+                  className="font-medium text-sm !px-6 py-2 group cursor-pointer"
+                >
+                  <div className="flex items-center">
+                    Join the Movement
+                    <ArrowUpRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </div>
+                </SpecularButton>
+              </a>
             </div>
             <button
               className="text-white p-2.5 rounded-full border border-white/20 hover:bg-white/10 transition-colors flex items-center justify-center"
@@ -148,10 +201,7 @@ export default function Navbar() {
                 >
                   <a
                     href={link.href}
-                    onClick={() => {
-                      setActiveLink(link.label);
-                      setIsMobileMenuOpen(false);
-                    }}
+                    onClick={(e) => handleNavClick(e, link.href, link.label)}
                     className={`text-4xl font-display font-bold ${activeLink === link.label ? "text-[var(--accent-yellow)]" : "text-white"}`}
                   >
                     {link.label}

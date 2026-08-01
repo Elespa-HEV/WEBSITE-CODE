@@ -4,14 +4,14 @@ import React from "react";
 import { motion } from "framer-motion";
 
 const advisors = [
-  { name: "Dr. Reji Mathai", org: "ARAI Director", photo: "/assets/Picture3.png" },
-  { name: "Sudeep Ambare", org: "ARAI-AMTIF CEO", photo: "/assets/Picture4.png" },
-  { name: "Pratima Kirloskar", org: "Kirloskar Brothers Limited", photo: "/assets/Picture5.png" },
-  { name: "Priya Philip", org: "Interics Designs MD & Founder", photo: "/assets/Picture6.png" },
-  { name: "Shreeyash Kolhapure", org: "Sandvik Coromant, Global Head", photo: "/assets/Picture7.png" },
-  { name: "Shailendra Bhandare", org: "Khaitan & Co., Director", photo: "/assets/Picture8.png" },
-  { name: "Dr. Pradeep Patil", org: "Principal, JSCOE", photo: "/assets/WhatsApp Image 2026-04-10 at 2.09.44 PM.jpeg" },
-  { name: "Rajeev Khade", org: "Sigma Electric, VP & Global Head of IT", photo: "/assets/WhatsApp Image 2026-04-10 at 2.12.32 PM.jpeg" },
+  { name: "Dr. Reji Mathai", org: "ARAI Director", photo: "/assets/Picture1.png" },
+  { name: "Sudeep Ambare", org: "ARAI-AMTIF CEO", photo: "/assets/Picture2.png" },
+  { name: "Pratima Kirloskar", org: "Kirloskar Brothers Limited", photo: "/assets/Picture3.png" },
+  { name: "Priya Philip", org: "Interics Designs MD & Founder", photo: "/assets/Picture4.png" },
+  { name: "Shreeyash Kolhapure", org: "Sandvik Coromant, Global Head", photo: "/assets/Picture5.png" },
+  { name: "Shailendra Bhandare", org: "Khaitan & Co., Director", photo: "/assets/Picture6.png" },
+  { name: "Dr. Pradeep Patil", org: "Principal, JSCOE", photo: "/assets/Picture7.png" },
+  { name: "Rajeev Khade", org: "Sigma Electric, VP & Global Head of IT", photo: "/assets/Picture8.png" },
 ];
 
 export default function AdvisorsGrid() {

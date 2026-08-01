@@ -157,84 +157,88 @@ export default function HybridTechnology() {
         </motion.div>
 
         {/* Mode Content Display */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
           {/* Left: Active mode details */}
           <div className="order-2 lg:order-1">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeMode}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 20 }}
-                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-              >
-                {/* Mode badge */}
-                <div
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full border mb-8"
-                  style={{
-                    borderColor: modes[activeMode].accent + "30",
-                    backgroundColor: modes[activeMode].accent + "08",
-                  }}
+            {/* Fixed-height container prevents layout shift when switching modes */}
+            <div className="relative min-h-[560px] md:min-h-[480px] lg:min-h-[460px]">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeMode}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 20 }}
+                  transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                  className="absolute inset-x-0 top-0"
                 >
-                  {React.createElement(modes[activeMode].icon, {
-                    size: 16,
-                    style: { color: modes[activeMode].accent },
-                  })}
-                  <span
-                    className="text-xs font-bold tracking-widest uppercase"
+                  {/* Mode badge */}
+                  <div
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full border mb-8"
+                    style={{
+                      borderColor: modes[activeMode].accent + "30",
+                      backgroundColor: modes[activeMode].accent + "08",
+                    }}
+                  >
+                    {React.createElement(modes[activeMode].icon, {
+                      size: 16,
+                      style: { color: modes[activeMode].accent },
+                    })}
+                    <span
+                      className="text-xs font-bold tracking-widest uppercase"
+                      style={{ color: modes[activeMode].accent }}
+                    >
+                      {modes[activeMode].title}
+                    </span>
+                  </div>
+
+                  {/* Description */}
+                  <h3 className="font-display font-black text-3xl md:text-4xl leading-[1.15] mb-6 tracking-tight">
+                    {modes[activeMode].description}
+                  </h3>
+
+                  <p className="text-white/50 text-[15px] leading-relaxed mb-10 max-w-md">
+                    {modes[activeMode].longDescription}
+                  </p>
+
+                  {/* Stats row */}
+                  <div className="flex gap-8 mb-10">
+                    {modes[activeMode].stats.map((stat, i) => (
+                      <motion.div
+                        key={stat.label}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: i * 0.1 + 0.15 }}
+                        className="flex flex-col"
+                      >
+                        <span
+                          className="text-2xl font-black font-display"
+                          style={{ color: modes[activeMode].accent }}
+                        >
+                          {stat.value}
+                        </span>
+                        <span className="text-xs text-white/40 font-medium tracking-wider uppercase mt-1">
+                          {stat.label}
+                        </span>
+                      </motion.div>
+                    ))}
+                  </div>
+
+                  {/* CTA */}
+                  <a
+                    href="#enquiry"
+                    className="group inline-flex items-center gap-2 font-bold text-[15px] transition-colors"
                     style={{ color: modes[activeMode].accent }}
                   >
-                    {modes[activeMode].title}
-                  </span>
-                </div>
-
-                {/* Description */}
-                <h3 className="font-display font-black text-3xl md:text-4xl leading-[1.15] mb-6 tracking-tight">
-                  {modes[activeMode].description}
-                </h3>
-
-                <p className="text-white/50 text-[15px] leading-relaxed mb-10 max-w-md">
-                  {modes[activeMode].longDescription}
-                </p>
-
-                {/* Stats row */}
-                <div className="flex gap-8 mb-10">
-                  {modes[activeMode].stats.map((stat, i) => (
-                    <motion.div
-                      key={stat.label}
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: i * 0.1 + 0.2 }}
-                      className="flex flex-col"
-                    >
-                      <span
-                        className="text-2xl font-black font-display"
-                        style={{ color: modes[activeMode].accent }}
-                      >
-                        {stat.value}
-                      </span>
-                      <span className="text-xs text-white/40 font-medium tracking-wider uppercase mt-1">
-                        {stat.label}
-                      </span>
-                    </motion.div>
-                  ))}
-                </div>
-
-                {/* CTA */}
-                <a
-                  href="#enquiry"
-                  className="group inline-flex items-center gap-2 font-bold text-[15px] transition-colors"
-                  style={{ color: modes[activeMode].accent }}
-                >
-                  <span>Explore This Mode</span>
-                  <ArrowRight
-                    size={16}
-                    strokeWidth={2.5}
-                    className="transition-transform duration-300 group-hover:translate-x-1"
-                  />
-                </a>
-              </motion.div>
-            </AnimatePresence>
+                    <span>Explore This Mode</span>
+                    <ArrowRight
+                      size={16}
+                      strokeWidth={2.5}
+                      className="transition-transform duration-300 group-hover:translate-x-1"
+                    />
+                  </a>
+                </motion.div>
+              </AnimatePresence>
+            </div>
           </div>
 
           {/* Right: Visual throttle indicator */}
@@ -246,9 +250,9 @@ export default function HybridTechnology() {
               transition={{ duration: 0.8 }}
               className="relative w-[320px] h-[320px] md:w-[400px] md:h-[400px]"
             >
-              {/* Outer ring */}
-              <div className="absolute inset-0 rounded-full border border-white/[0.06]" />
-              <div className="absolute inset-4 rounded-full border border-white/[0.04]" />
+              {/* Outer ring — pointer-events-none so clicks pass through to buttons */}
+              <div className="absolute inset-0 rounded-full border border-white/[0.06] pointer-events-none" />
+              <div className="absolute inset-4 rounded-full border border-white/[0.04] pointer-events-none" />
 
               {/* Mode indicators on the ring */}
               {modes.map((mode, i) => {
@@ -263,26 +267,37 @@ export default function HybridTechnology() {
                   <motion.button
                     key={mode.id}
                     onClick={() => setActiveMode(i)}
-                    className="absolute flex flex-col items-center gap-2 -translate-x-1/2 -translate-y-1/2 cursor-pointer"
+                    className="absolute z-10 flex flex-col items-center gap-2 -translate-x-1/2 -translate-y-1/2 cursor-pointer"
                     style={{ left: `${x}%`, top: `${y}%` }}
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    <motion.div
-                      className="w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center border-2 transition-colors duration-300"
-                      animate={{
-                        backgroundColor: isActive ? mode.accent + "20" : "rgba(255,255,255,0.03)",
-                        borderColor: isActive ? mode.accent : "rgba(255,255,255,0.08)",
-                        boxShadow: isActive ? `0 0 30px ${mode.accent}30` : "none",
-                      }}
-                    >
-                      <mode.icon
-                        size={22}
-                        strokeWidth={2}
-                        className="transition-colors duration-300"
-                        style={{ color: isActive ? mode.accent : "rgba(255,255,255,0.3)" }}
-                      />
-                    </motion.div>
+                    <div className="relative">
+                      {/* Pulsing ring on active node */}
+                      {isActive && (
+                        <motion.div
+                          className="absolute inset-[-4px] rounded-full"
+                          style={{ borderColor: mode.accent + "40", borderWidth: 1 }}
+                          animate={{ scale: [1, 1.2, 1], opacity: [0.6, 0, 0.6] }}
+                          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                        />
+                      )}
+                      <motion.div
+                        className="w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center border-2 transition-colors duration-300"
+                        animate={{
+                          backgroundColor: isActive ? mode.accent + "20" : "rgba(255,255,255,0.03)",
+                          borderColor: isActive ? mode.accent : "rgba(255,255,255,0.08)",
+                          boxShadow: isActive ? `0 0 30px ${mode.accent}30` : "none",
+                        }}
+                      >
+                        <mode.icon
+                          size={22}
+                          strokeWidth={2}
+                          className="transition-colors duration-300"
+                          style={{ color: isActive ? mode.accent : "rgba(255,255,255,0.3)" }}
+                        />
+                      </motion.div>
+                    </div>
                     <span
                       className="text-[10px] font-bold tracking-widest uppercase transition-colors duration-300"
                       style={{ color: isActive ? mode.accent : "rgba(255,255,255,0.25)" }}

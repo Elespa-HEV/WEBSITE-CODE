@@ -9,14 +9,14 @@ const pressItems = [
     publication: "The Hindu BusinessLine",
     headline: "Pune startup bets on ₹60,000 hybrid retrofit, undercutting ₹9 lakh Kawasaki bikes",
     strap: "ELESPA HEV's affordable retrofitting kits promise to bring hybrid mobility to India's massive petrol two-wheeler market at a fraction of the cost.",
-    url: "#",
+    url: "https://www.thehindubusinessline.com/companies/pune-startup-bets-on-60000-hybrid-retrofit-undercutting-9-lakh-kawasaki-bikes/article70796022.ece",
     color: "#C41E3A",
   },
   {
     publication: "ZigWheels",
     headline: "Exclusive: Pune-based Startup Creates India's First Hybrid Scooter",
     strap: "ELESPA's patented plug-in parallel hybrid technology allows seamless switching between electric, hybrid, and petrol modes on a single throttle.",
-    url: "#",
+    url: "https://www.zigwheels.com/news-features/general-news/exclusive-pune-based-startup-creates-indias-first-hybrid-scooter/49049/",
     color: "#FF6600",
   },
 ];
