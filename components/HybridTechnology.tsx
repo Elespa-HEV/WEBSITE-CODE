@@ -223,19 +223,8 @@ export default function HybridTechnology() {
                     ))}
                   </div>
 
-                  {/* CTA */}
-                  <a
-                    href="#enquiry"
-                    className="group inline-flex items-center gap-2 font-bold text-[15px] transition-colors"
-                    style={{ color: modes[activeMode].accent }}
-                  >
-                    <span>Explore This Mode</span>
-                    <ArrowRight
-                      size={16}
-                      strokeWidth={2.5}
-                      className="transition-transform duration-300 group-hover:translate-x-1"
-                    />
-                  </a>
+                  {/* CTA removed to preserve clean layout */}
+                  <div className="h-0" />
                 </motion.div>
               </AnimatePresence>
             </div>

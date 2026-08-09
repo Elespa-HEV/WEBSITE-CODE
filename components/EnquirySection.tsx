@@ -22,6 +22,12 @@ export default function EnquirySection() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    const subject = `ELESPA HEV Enquiry from ${formData.fullName}`;
+    const body = `Enquiry Type: ${formData.enquiryType}\nFull Name: ${formData.fullName}\nPhone: ${formData.phone}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`;
+    const mailtoLink = `mailto:elespahev@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+    window.location.href = mailtoLink;
     setSubmitted(true);
     setTimeout(() => setSubmitted(false), 4000);
   };
@@ -202,13 +208,13 @@ export default function EnquirySection() {
             {/* Contact Cards */}
             <div className="space-y-4">
               {/* Email */}
-              <a href="mailto:enquiry@elespa.in" className="group flex items-start gap-4 p-5 rounded-2xl bg-white border border-black/[0.06] hover:border-[var(--accent-yellow)]/30 transition-all duration-300">
+              <a href="mailto:elespahev@gmail.com" className="group flex items-start gap-4 p-5 rounded-2xl bg-white border border-black/[0.06] hover:border-[var(--accent-yellow)]/30 transition-all duration-300">
                 <div className="w-10 h-10 rounded-full bg-[var(--accent-yellow)]/10 flex items-center justify-center flex-shrink-0">
                   <Mail size={18} className="text-[var(--accent-yellow)]" />
                 </div>
                 <div>
                   <p className="text-[12px] font-bold text-[#525252] tracking-wider uppercase mb-1">Email</p>
-                  <p className="text-[15px] font-semibold text-[#0A0A0A] group-hover:text-[var(--accent-yellow)] transition-colors">enquiry@elespa.in</p>
+                  <p className="text-[15px] font-semibold text-[#0A0A0A] group-hover:text-[var(--accent-yellow)] transition-colors">elespahev@gmail.com</p>
                 </div>
               </a>
 

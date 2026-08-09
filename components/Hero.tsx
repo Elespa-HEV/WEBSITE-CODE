@@ -127,9 +127,12 @@ export default function Hero() {
             transition={{ delay: 0.65, duration: 0.6 }}
             className="flex flex-col sm:flex-row gap-4 mb-10"
           >
-            <Button variant="primary" icon="arrow-right" className="!rounded-full px-7 py-2.5 text-sm font-bold !text-black !bg-[var(--accent-yellow)] border-none">
+            <a
+              href="#technology-modes"
+              className="inline-flex items-center justify-center rounded-full px-7 py-2.5 text-sm font-bold text-black bg-[var(--accent-yellow)] border-none transition-colors duration-300 hover:bg-[#E0A800]"
+            >
               Explore ELESPA
-            </Button>
+            </a>
             <Button variant="outline" className="!rounded-full px-7 py-2.5 text-sm font-medium border-white/30 text-white hover:bg-white/10 group">
               Our Technology 
               <PlayCircle className="w-4 h-4 ml-2 opacity-80 group-hover:opacity-100 transition-opacity" />

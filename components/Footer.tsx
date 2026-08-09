@@ -76,8 +76,8 @@ export default function Footer() {
             <div className="space-y-4">
               <div>
                 <p className="text-white/30 text-[11px] uppercase tracking-wider mb-1">Email</p>
-                <a href="mailto:enquiry@elespa.in" className="text-white/60 text-[14px] hover:text-[var(--accent-yellow)] transition-colors">
-                  enquiry@elespa.in
+                <a href="mailto:elespahev@gmail.com" className="text-white/60 text-[14px] hover:text-[var(--accent-yellow)] transition-colors">
+                  elespahev@gmail.com
                 </a>
               </div>
               <div>

@@ -106,18 +106,7 @@ export default function MobilitySection() {
               className="text-[15px] text-[#6B6B6B] mb-8 leading-[1.7] font-normal max-w-[340px]"
             />
             
-            <motion.a
-              href="#"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.6 }}
-              className="group relative inline-flex items-center gap-2 text-[var(--accent-yellow)] font-bold text-[15px]"
-            >
-              <span className="relative z-10">Learn More</span>
-              <ArrowRight size={16} strokeWidth={2.5} className="transition-transform duration-300 group-hover:translate-x-1 relative z-10" />
-              <span className="absolute bottom-[-4px] left-0 w-0 h-[2px] bg-[var(--accent-yellow)] transition-all duration-300 group-hover:w-full" />
-            </motion.a>
+            <div className="h-0" />
           </div>
 
           {/* CENTER COLUMN: Scooter Image (~40%) */}

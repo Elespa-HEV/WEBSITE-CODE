@@ -68,7 +68,7 @@ export default function EcosystemGrid() {
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 relative z-10">
             <div className="flex flex-col gap-2 max-w-xl">
               <h2 className="font-display font-black text-3xl md:text-4xl tracking-tight text-[#0A0A0A]">
-                Our Scooter Lineup
+                Our Product Lineup
               </h2>
               <p className="text-[14px] text-[#525252] leading-relaxed">
                 India's first parallel hybrid electric scooter. Three riding modes, one intelligent platform — designed for the way you move.
