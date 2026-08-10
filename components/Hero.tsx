@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { motion, useScroll, useTransform, useSpring, useMotionValue } from "framer-motion";
 import { ArrowRight, PlayCircle, Leaf, BatteryCharging, MapPin, Cpu, ArrowDown } from "lucide-react";
 import { Button } from "./ui/Button";
+import TechVideoModal from "./TechVideoModal";
 
 // Custom curved arrow SVG
 const CurvedArrow = () => (
@@ -15,6 +16,7 @@ const CurvedArrow = () => (
 
 export default function Hero() {
   const containerRef = useRef(null);
+  const [isVideoOpen, setIsVideoOpen] = useState(false);
   
   // Parallax on scroll
   const { scrollY } = useScroll();
@@ -133,7 +135,7 @@ export default function Hero() {
             >
               Explore ELESPA
             </a>
-            <Button variant="outline" className="!rounded-full px-7 py-2.5 text-sm font-medium border-white/30 text-white hover:bg-white/10 group">
+            <Button variant="outline" className="!rounded-full px-7 py-2.5 text-sm font-medium border-white/30 text-white hover:bg-white/10 group" onClick={() => setIsVideoOpen(true)}>
               Our Technology 
               <PlayCircle className="w-4 h-4 ml-2 opacity-80 group-hover:opacity-100 transition-opacity" />
             </Button>
@@ -196,6 +198,9 @@ export default function Hero() {
         </div>
       </motion.div>
       
+      {/* Technology Video Modal */}
+      <TechVideoModal isOpen={isVideoOpen} onClose={() => setIsVideoOpen(false)} />
+
       {/* Hand-written font import */}
       <style dangerouslySetInnerHTML={{__html: `
         @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600&display=swap');

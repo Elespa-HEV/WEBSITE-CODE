@@ -2,13 +2,13 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Leaf, RotateCcw, Recycle, Globe, Target, Droplets, Zap } from "lucide-react";
+import { Leaf, RotateCcw, Recycle, Globe, Target, Droplets, Zap, Heart, ShoppingBag } from "lucide-react";
 
 const pillars = [
   {
     icon: Leaf,
     title: "Reduce",
-    description: "Cut fossil fuel consumption by up to 50% through intelligent hybrid power management. Lower emissions, lower costs, cleaner air.",
+    description: "Cut fossil fuel consumption by up to 90% through intelligent hybrid power management. Lower emissions, lower costs, cleaner air.",
     color: "#4ADE80",
   },
   {
@@ -29,6 +29,8 @@ const sdgAlignments = [
   { number: 7, title: "Affordable & Clean Energy", icon: Zap },
   { number: 9, title: "Industry, Innovation & Infrastructure", icon: Target },
   { number: 11, title: "Sustainable Cities & Communities", icon: Globe },
+  { number: 3, title: "Good Health & Well-Being", icon: Heart },
+  { number: 12, title: "Responsible Consumption & Production", icon: ShoppingBag },
   { number: 13, title: "Climate Action", icon: Droplets },
 ];
 
@@ -202,24 +204,26 @@ export default function MissionSection() {
             UN SDG Alignment
           </motion.h3>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
-            {sdgAlignments.map((sdg, i) => (
-              <motion.div
-                key={sdg.number}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="group flex flex-col items-center text-center p-5 rounded-2xl border border-white/[0.04] hover:border-[var(--accent-yellow)]/20 bg-white/[0.01] hover:bg-white/[0.03] transition-all duration-300"
-              >
-                <span className="text-[var(--accent-yellow)] font-black font-display text-2xl mb-2">
-                  {sdg.number}
-                </span>
-                <span className="text-white/40 text-[11px] font-medium leading-snug group-hover:text-white/60 transition-colors">
-                  {sdg.title}
-                </span>
-              </motion.div>
-            ))}
+          <div className="flex justify-center overflow-x-auto pb-1">
+            <div className="flex flex-row gap-3">
+              {sdgAlignments.map((sdg, i) => (
+                <motion.div
+                  key={sdg.number}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.08 }}
+                  className="group flex flex-col items-center text-center px-4 py-3.5 rounded-xl border border-white/[0.04] hover:border-[var(--accent-yellow)]/20 bg-white/[0.01] hover:bg-white/[0.03] transition-all duration-300 w-[120px] shrink-0"
+                >
+                  <span className="text-[var(--accent-yellow)] font-black font-display text-2xl mb-1">
+                    {sdg.number}
+                  </span>
+                  <span className="text-white/40 text-[10px] font-medium leading-snug group-hover:text-white/60 transition-colors">
+                    {sdg.title}
+                  </span>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

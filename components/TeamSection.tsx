@@ -7,21 +7,21 @@ import { X, ChevronRight } from "lucide-react";
 const directors = [
   {
     name: "Prathamesh Choudhary",
-    role: "Director",
+    role: "Managing Director",
     photo: "/assets/prathamesh_new.jpeg",
     shortBio: "BE Mechanical & MBA from SPPU, Pune. 5+ years in automotive design, testing & marketing. 12 State, 8 National, and 1 International Award winner.",
     fullBio: `BE Mechanical Engineer & MBA in Marketing and Operations & Supply Chain Management from SPPU, Pune. 5+ years in automotive design, testing, marketing, and supply chain strategies. Won around 12 State Awards, 8 National Awards and 1 International Award. Featured as the cover page of CEO Insights Magazine among all Shortlisted "TOP 10 Best Startup CEO's in 2022". He is the only innovator cum entrepreneur who brought forward the concept of Hybrid Electric Scooters/Mopeds/Bikes into the market. His vision has been to electrify India by converting existing vehicles into Hybrid Electric Vehicles, thereby reducing pollution and consumption of fossil fuels.`,
   },
   {
     name: "Sagar Naikwadi",
-    role: "Director",
+    role: "Executive Director",
     photo: "/assets/sagar.jpeg",
-    shortBio: "8+ years in hybrid cooling & automotive sector. BE E&TC (Pune) + MS IC Design (HKUST). IT & Fintech business development expertise.",
-    fullBio: `An accomplished engineering and business professional with over eight years of expertise in energy-saving solutions for hybrid cooling and the automotive sector. With a strong background in electronic hardware and software technologies, he has consistently delivered innovative solutions that merge technical excellence with sustainable impact. In addition, he brings more than four years of experience in IT and Fintech business development, where he has led software proof-of-concepts, business models, and marketing strategies. Holding a Bachelor's degree in Electronics and Telecommunications Engineering from the University of Pune and a Master's in Integrated Circuit Design Engineering from the Hong Kong University of Science and Technology, Mr. Naikwadi combines global perspective with entrepreneurial vision.`,
+    shortBio: "8+ years of experience in hybrid cooling and the automotive sector. BE E&TC from Pune and MS in IC Design from HKUST. Brings expertise across automotive technology, engineering, IT and fintech.",
+    fullBio: `An accomplished engineering and business professional with 8+ years of experience in hybrid cooling and the automotive sector, along with 4+ years in IT and fintech business development. He holds a BE in Electronics & Telecommunications Engineering from Pune and an MS in Integrated Circuit Design from HKUST.`,
   },
   {
     name: "Nitin Choudhary",
-    role: "Director",
+    role: "Executive Director",
     photo: "/assets/nitin.png",
     shortBio: "BE Civil Engineer with 20+ years in large-scale project execution. Former Kumar Properties, Kolte Patil, DSK Developers.",
     fullBio: `BE Civil engineer with 20+ years of experience in large-scale project execution and infrastructure development. He has worked with reputed organizations such as Kumar Properties, Kolte Patil Developers, and DSK Developers, delivering complex residential and commercial projects. At ELESPA HEV, his role will be instrumental in building scalable manufacturing infrastructure, streamlining operations, and executing large-scale deployment strategies. His deep understanding of execution dynamics, vendor coordination, and on-ground project management will significantly strengthen our transition from prototype development to mass manufacturing.`,
@@ -171,21 +171,21 @@ export default function TeamSection() {
                   />
                 </div>
 
-                {/* Content panel — internally scrollable */}
-                <div className="flex-1 min-h-0 flex flex-col">
-                  <div className="p-8 md:p-10 overflow-y-auto flex-1 min-h-0 modal-scroll">
-                    <div className="mb-6">
-                      <h3 className="font-display font-black text-2xl md:text-3xl text-white mb-2">
+                {/* Content panel — no scroll, compact to fit viewport */}
+                <div className="flex-1 flex flex-col justify-center">
+                  <div className="p-6 md:p-8">
+                    <div className="mb-4">
+                      <h3 className="font-display font-black text-xl md:text-2xl text-white mb-1.5">
                         {directors[expandedDirector].name}
                       </h3>
-                      <p className="text-[var(--accent-yellow)] text-[13px] font-bold tracking-wider uppercase">
+                      <p className="text-[var(--accent-yellow)] text-[12px] font-bold tracking-wider uppercase">
                         {directors[expandedDirector].role}
                       </p>
                     </div>
 
-                    <div className="w-12 h-[2px] bg-[var(--accent-yellow)]/30 mb-6" />
+                    <div className="w-10 h-[2px] bg-[var(--accent-yellow)]/30 mb-4" />
 
-                    <p className="text-white/60 text-[14px] leading-[1.8]">
+                    <p className="text-white/60 text-[13px] leading-[1.65]">
                       {directors[expandedDirector].fullBio}
                     </p>
                   </div>
