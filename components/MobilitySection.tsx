@@ -140,7 +140,7 @@ export default function MobilitySection() {
               className="relative z-10 w-full max-w-[520px]"
             >
               <video 
-                src="/assets/vid_elespa.mp4"
+                src="/assets/vid_elespa_gwr_video_1080p_enhanced.mp4"
                 autoPlay
                 loop
                 muted

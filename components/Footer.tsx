@@ -25,13 +25,12 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr] gap-12 lg:gap-8">
           {/* Brand Column */}
           <div>
-            <Link href="/" className="inline-flex items-center gap-3 mb-6">
-              <span className="[font-family:var(--font-syncopate)] font-bold tracking-widest text-xl text-white italic">
-                ELESPA
-              </span>
-              <span className="[font-family:var(--font-syncopate)] text-[10px] tracking-[0.2em] text-white/60 mt-1 uppercase">
-                HEV
-              </span>
+            <Link href="/" className="inline-block mb-6">
+              <img
+                src="/assets/elespa_logo_cropped.png"
+                alt="ELESPA HEV"
+                className="h-12 lg:h-14 w-auto object-contain"
+              />
             </Link>
             <p className="text-white/40 text-[14px] leading-relaxed max-w-xs mb-8">
               Bridging the gap between ICE vehicles and full EVs. India&apos;s first plug-in parallel hybrid electric two-wheeler technology.

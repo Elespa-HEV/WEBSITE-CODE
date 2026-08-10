@@ -17,6 +17,14 @@ const syncopate = Syncopate({
 export const metadata: Metadata = {
   title: "ELESPA HEV | India's Next Mobility",
   description: "Building India's intelligent hybrid mobility platform for a smarter, cleaner and more connected tomorrow.",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon.png", type: "image/png", sizes: "32x32" },
+    ],
+    shortcut: "/favicon.ico",
+    apple: "/favicon.png",
+  },
 };
 
 export default function RootLayout({
