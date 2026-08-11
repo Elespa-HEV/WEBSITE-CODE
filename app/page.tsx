@@ -19,7 +19,6 @@ export default function Home() {
       <div id="home">
         <Hero />
       </div>
-      <h1>DEPLOY TEST 123</h1>
       <MobilitySection />
       <HybridTechnology />
       <div id="products">
