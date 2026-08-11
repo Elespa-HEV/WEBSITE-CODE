@@ -20,20 +20,6 @@ const modes = [
     ],
   },
   {
-    id: "hybrid",
-    title: "Hybrid Mode",
-    shortTitle: "HEV",
-    description: "Combined power of electricity and petrol for maximum acceleration, high torque performance and extended range.",
-    longDescription: "Our patented parallel hybrid system seamlessly combines electric and petrol power on a single throttle twist. Get explosive acceleration, unmatched torque, and dramatically extended range — the best of both worlds, intelligently managed.",
-    icon: RefreshCw,
-    accent: "#F5B700",
-    stats: [
-      { label: "Power", value: "Max" },
-      { label: "Best For", value: "All" },
-      { label: "Range", value: "Extended" },
-    ],
-  },
-  {
     id: "petrol",
     title: "Petrol Mode",
     shortTitle: "ICE",
@@ -47,10 +33,24 @@ const modes = [
       { label: "Refuel", value: "Instant" },
     ],
   },
+  {
+    id: "hybrid",
+    title: "Hybrid Mode",
+    shortTitle: "HEV",
+    description: "Combined power of electricity and petrol for maximum acceleration, high torque performance and extended range.",
+    longDescription: "Our patented parallel hybrid system seamlessly combines electric and petrol power on a single throttle twist. Get explosive acceleration, unmatched torque, and dramatically extended range — the best of both worlds, intelligently managed.",
+    icon: RefreshCw,
+    accent: "#F5B700",
+    stats: [
+      { label: "Power", value: "Max" },
+      { label: "Best For", value: "All" },
+      { label: "Range", value: "Extended" },
+    ],
+  },
 ];
 
 export default function HybridTechnology() {
-  const [activeMode, setActiveMode] = useState(1); // Default to hybrid
+  const [activeMode, setActiveMode] = useState(2); // Default to hybrid (now index 2)
   const containerRef = useRef<HTMLElement>(null);
 
   const { scrollYProgress } = useScroll({
