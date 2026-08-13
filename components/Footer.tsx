@@ -89,7 +89,7 @@ export default function Footer() {
                 <p className="text-white/30 text-[11px] uppercase tracking-wider mb-1">Office</p>
                 <p className="text-white/40 text-[13px] leading-relaxed">
                   ELESPA Office, B Wing, JSCOE,
-                  Handewadi, Satar Nagar, Hadapsar,
+                  Handewadi, Satav Nagar, Hadapsar,
                   Pune, MH 411028
                 </p>
               </div>

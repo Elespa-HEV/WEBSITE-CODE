@@ -7,17 +7,17 @@ import { ArrowUpRight } from "lucide-react";
 const pressItems = [
   {
     publication: "The Hindu BusinessLine",
+    logo: "/assets/businessline_logo_white.svg",
     headline: "Pune startup bets on ₹60,000 hybrid retrofit, undercutting ₹9 lakh Kawasaki bikes",
     strap: "ELESPA HEV's affordable retrofitting kits promise to bring hybrid mobility to India's massive petrol two-wheeler market at a fraction of the cost.",
     url: "https://www.thehindubusinessline.com/companies/pune-startup-bets-on-60000-hybrid-retrofit-undercutting-9-lakh-kawasaki-bikes/article70796022.ece",
-    color: "#C41E3A",
   },
   {
     publication: "ZigWheels",
+    logo: "/assets/zigwheels_logo_white.svg",
     headline: "Exclusive: Pune-based Startup Creates India's First Hybrid Scooter",
     strap: "ELESPA's patented plug-in parallel hybrid technology allows seamless switching between electric, hybrid, and petrol modes on a single throttle.",
     url: "https://www.zigwheels.com/news-features/general-news/exclusive-pune-based-startup-creates-indias-first-hybrid-scooter/49049/",
-    color: "#FF6600",
   },
 ];
 
@@ -73,16 +73,14 @@ export default function InTheMedia() {
               transition={{ duration: 0.5, delay: i * 0.15 }}
               className="group relative block rounded-2xl border border-white/[0.06] hover:border-[var(--accent-yellow)]/20 bg-white/[0.02] hover:bg-white/[0.04] p-8 lg:p-10 transition-all duration-500"
             >
-              {/* Publication name */}
+              {/* Publication logo */}
               <div className="flex items-center justify-between mb-6">
-                <div className="flex items-center gap-3">
-                  <div
-                    className="w-2 h-2 rounded-full"
-                    style={{ backgroundColor: item.color }}
+                <div className="flex items-center h-8">
+                  <img
+                    src={item.logo}
+                    alt={`${item.publication} logo`}
+                    className="h-6 md:h-7 w-auto object-contain"
                   />
-                  <span className="text-[13px] font-bold text-white/60 tracking-wide uppercase">
-                    {item.publication}
-                  </span>
                 </div>
                 <ArrowUpRight
                   size={18}

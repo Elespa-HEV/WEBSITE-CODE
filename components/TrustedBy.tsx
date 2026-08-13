@@ -12,6 +12,9 @@ const partners = [
   { name: "MQTT", displayName: "MQTT", icon: MessageSquare, color: "#660066" },
 ];
 
+// Radxa is rendered separately as it uses its official SVG mark + wordmark
+const RADXA_COLOR = "#74BC1F";
+
 export default function TrustedBy() {
   return (
     <section className="bg-[#0a0a0c] border-t border-b border-white/[0.04] py-12 lg:py-16 relative overflow-hidden">
@@ -80,6 +83,41 @@ export default function TrustedBy() {
                 </span>
               </motion.div>
             ))}
+
+            {/* Radxa — official diamond mark SVG + wordmark */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: partners.length * 0.08, duration: 0.4 }}
+              className="group flex items-center gap-2.5 cursor-default"
+              onMouseEnter={(e) => {
+                const el = e.currentTarget;
+                const img = el.querySelector("img") as HTMLElement | null;
+                const span = el.querySelector("span") as HTMLElement | null;
+                if (img) img.style.filter = "brightness(0) saturate(100%) invert(63%) sepia(68%) saturate(450%) hue-rotate(51deg) brightness(94%)";
+                if (span) span.style.color = RADXA_COLOR;
+              }}
+              onMouseLeave={(e) => {
+                const el = e.currentTarget;
+                const img = el.querySelector("img") as HTMLElement | null;
+                const span = el.querySelector("span") as HTMLElement | null;
+                if (img) img.style.filter = "";
+                if (span) span.style.color = "";
+              }}
+            >
+              <img
+                src="/assets/radxa_Radxa.svg"
+                alt="Radxa logo mark"
+                width={20}
+                height={20}
+                className="opacity-25 group-hover:opacity-90 transition-all duration-400"
+                style={{ filter: "brightness(0) invert(1)" }}
+              />
+              <span className="text-white/25 group-hover:text-white/90 transition-colors duration-400 font-semibold text-[14px] tracking-wide">
+                Radxa
+              </span>
+            </motion.div>
           </div>
         </div>
       </div>
