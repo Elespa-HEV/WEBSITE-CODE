@@ -23,7 +23,7 @@ const pressItems = [
 
 export default function InTheMedia() {
   return (
-    <section id="media" className="bg-[#0a0a0c] text-white relative overflow-hidden py-20 lg:py-28">
+    <section id="media" className="bg-[#0a0a0c] text-white relative overflow-hidden pt-10 lg:pt-12 pb-12 lg:pb-16">
       <div className="container relative z-10">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">

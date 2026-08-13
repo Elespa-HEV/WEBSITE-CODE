@@ -77,7 +77,7 @@ export default function MobilitySection() {
     <section 
       ref={containerRef}
       className="bg-[#F5F5F3] text-[#0A0A0A] relative overflow-hidden"
-      style={{ paddingTop: '80px', paddingBottom: '80px' }}
+      style={{ paddingTop: '40px', paddingBottom: '48px' }}
     >
       {/* Subtle dot grid background */}
       <div 

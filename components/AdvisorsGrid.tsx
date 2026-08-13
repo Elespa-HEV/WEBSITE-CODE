@@ -16,7 +16,7 @@ const advisors = [
 
 export default function AdvisorsGrid() {
   return (
-    <section className="bg-[#111] text-white relative overflow-hidden py-20 lg:py-28">
+    <section className="bg-[#111] text-white relative overflow-hidden pt-10 lg:pt-12 pb-12 lg:pb-16">
       <div className="container relative z-10">
         {/* Section Header */}
         <div className="text-center mb-14 lg:mb-18">

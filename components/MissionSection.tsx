@@ -38,7 +38,7 @@ export default function MissionSection() {
   const [activePillar, setActivePillar] = useState(0);
 
   return (
-    <section id="mission" className="bg-[#0a0a0c] text-white relative overflow-hidden py-20 lg:py-32">
+    <section id="mission" className="bg-[#0a0a0c] text-white relative overflow-hidden pt-10 lg:pt-12 pb-12 lg:pb-16">
       {/* Subtle radial glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-[var(--accent-yellow)] opacity-[0.02] rounded-full blur-[200px] pointer-events-none" />
 

@@ -55,7 +55,7 @@ export default function EcosystemGrid() {
   }, { scope: containerRef });
 
   return (
-    <section ref={containerRef} className="bg-[#F5F5F5] text-[#0A0A0A] py-16 lg:py-24 overflow-hidden relative">
+    <section ref={containerRef} className="bg-[#F5F5F5] text-[#0A0A0A] pt-10 lg:pt-12 pb-10 lg:pb-14 overflow-hidden relative">
       <div className="container relative z-10">
 
         {/* White Bordered Container */}

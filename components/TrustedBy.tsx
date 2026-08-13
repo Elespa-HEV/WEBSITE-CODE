@@ -17,7 +17,7 @@ const RADXA_COLOR = "#74BC1F";
 
 export default function TrustedBy() {
   return (
-    <section className="bg-[#0a0a0c] border-t border-b border-white/[0.04] py-12 lg:py-16 relative overflow-hidden">
+    <section className="bg-[#0a0a0c] border-t border-b border-white/[0.04] pt-8 lg:pt-10 pb-8 lg:pb-10 relative overflow-hidden">
       {/* Subtle glow accent */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[1px] bg-gradient-to-r from-transparent via-[var(--accent-yellow)]/20 to-transparent" />
 

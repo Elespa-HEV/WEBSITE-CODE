@@ -32,7 +32,7 @@ export default function TeamSection() {
   const [expandedDirector, setExpandedDirector] = useState<number | null>(null);
 
   return (
-    <section id="team" className="bg-[#0a0a0c] text-white relative overflow-hidden py-20 lg:py-32">
+    <section id="team" className="bg-[#0a0a0c] text-white relative overflow-hidden pt-10 lg:pt-12 pb-12 lg:pb-16">
       {/* Subtle background pattern */}
       <div
         className="absolute inset-0 opacity-[0.02] pointer-events-none"

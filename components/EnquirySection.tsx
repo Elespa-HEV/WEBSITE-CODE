@@ -33,7 +33,7 @@ export default function EnquirySection() {
   };
 
   return (
-    <section id="enquiry" className="bg-[#FAFAFA] text-[#0A0A0A] relative overflow-hidden py-20 lg:py-32">
+    <section id="enquiry" className="bg-[#FAFAFA] text-[#0A0A0A] relative overflow-hidden pt-10 lg:pt-12 pb-12 lg:pb-16">
       {/* Subtle grid background */}
       <div
         className="absolute inset-0 opacity-[0.02] pointer-events-none"

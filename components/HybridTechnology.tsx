@@ -64,7 +64,7 @@ export default function HybridTechnology() {
     <section
       id="technology-modes"
       ref={containerRef}
-      className="bg-[#0a0a0c] text-white relative overflow-hidden py-20 lg:py-32"
+      className="bg-[#0a0a0c] text-white relative overflow-hidden pt-6 lg:pt-8 pb-10 lg:pb-14"
     >
       {/* Subtle grid background */}
       <div
@@ -85,7 +85,7 @@ export default function HybridTechnology() {
 
       <div className="container relative z-10">
         {/* Section Header */}
-        <div className="text-center mb-16 lg:mb-20">
+        <div className="text-center mb-10 lg:mb-12">
           <motion.span
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -124,7 +124,7 @@ export default function HybridTechnology() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.3 }}
-          className="flex justify-center mb-16"
+          className="flex justify-center mb-10"
         >
           <div className="relative flex items-center bg-white/[0.04] backdrop-blur-sm border border-white/[0.08] rounded-full p-1.5">
             {/* Sliding indicator */}

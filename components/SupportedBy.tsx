@@ -86,7 +86,7 @@ export default function SupportedBy() {
   return (
     <section
       id="supported-by"
-      className="bg-[#FAFAFA] text-[#0A0A0A] relative overflow-hidden py-16 lg:py-20 scroll-mt-20"
+      className="bg-[#FAFAFA] text-[#0A0A0A] relative overflow-hidden pt-10 lg:pt-12 pb-10 lg:pb-14 scroll-mt-20"
     >
       <div className="container relative z-10">
 

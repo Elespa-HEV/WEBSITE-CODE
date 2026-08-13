@@ -9,8 +9,8 @@ import SpecularButton from "./ui/SpecularButton";
 
 const NAV_LINKS = [
   { label: "Home", href: "#home" },
-  { label: "Products", href: "#products" },
   { label: "Technology", href: "#technology-modes" },
+  { label: "Products", href: "#products" },
   { label: "About", href: "#team" },
   { label: "Contact", href: "#enquiry" },
 ];
@@ -80,9 +80,9 @@ export default function Navbar() {
     const element = document.getElementById(targetId);
     
     if (element) {
-      // 80px offset for the navbar
+      // 60px offset: element lands 60px from viewport top
       const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - 80;
+      const offsetPosition = elementPosition + window.pageYOffset - 60;
 
       window.scrollTo({
         top: offsetPosition,

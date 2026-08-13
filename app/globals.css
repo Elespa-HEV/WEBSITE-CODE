@@ -68,15 +68,15 @@ body {
   color: #000;
 }
 
-/* Section styling base */
+/* Section styling base — padding-top removed to prevent double top spacing.
+   Each component manages its own top padding. Bottom padding kept here
+   as a baseline in case a component doesn't define its own. */
 section {
-  padding-top: 64px;
-  padding-bottom: 64px;
+  padding-bottom: 40px;
 }
 @media (min-width: 1024px) {
   section {
-    padding-top: 120px;
-    padding-bottom: 120px;
+    padding-bottom: 64px;
   }
 }
 .container {
