@@ -97,6 +97,7 @@ export default function EnquirySection() {
                     value={formData.enquiryType}
                     onChange={handleChange}
                     required
+                    autoComplete="off"
                     className="w-full appearance-none bg-white border border-black/10 rounded-xl px-5 py-4 text-[15px] text-[#0A0A0A] font-medium focus:outline-none focus:border-[var(--accent-yellow)] focus:ring-2 focus:ring-[var(--accent-yellow)]/20 transition-all cursor-pointer"
                   >
                     <option value="">Select enquiry type</option>
@@ -121,6 +122,7 @@ export default function EnquirySection() {
                     value={formData.fullName}
                     onChange={handleChange}
                     required
+                    autoComplete="name"
                     placeholder="Your name"
                     className="w-full bg-white border border-black/10 rounded-xl px-5 py-4 text-[15px] text-[#0A0A0A] font-medium placeholder:text-[#aaa] focus:outline-none focus:border-[var(--accent-yellow)] focus:ring-2 focus:ring-[var(--accent-yellow)]/20 transition-all"
                   />
@@ -136,6 +138,7 @@ export default function EnquirySection() {
                     value={formData.phone}
                     onChange={handleChange}
                     required
+                    autoComplete="tel"
                     placeholder="+91 XXXXX XXXXX"
                     className="w-full bg-white border border-black/10 rounded-xl px-5 py-4 text-[15px] text-[#0A0A0A] font-medium placeholder:text-[#aaa] focus:outline-none focus:border-[var(--accent-yellow)] focus:ring-2 focus:ring-[var(--accent-yellow)]/20 transition-all"
                   />
@@ -154,6 +157,7 @@ export default function EnquirySection() {
                   value={formData.email}
                   onChange={handleChange}
                   required
+                  autoComplete="email"
                   placeholder="you@example.com"
                   className="w-full bg-white border border-black/10 rounded-xl px-5 py-4 text-[15px] text-[#0A0A0A] font-medium placeholder:text-[#aaa] focus:outline-none focus:border-[var(--accent-yellow)] focus:ring-2 focus:ring-[var(--accent-yellow)]/20 transition-all"
                 />
@@ -170,6 +174,7 @@ export default function EnquirySection() {
                   value={formData.message}
                   onChange={handleChange}
                   rows={4}
+                  autoComplete="off"
                   placeholder="Tell us about your requirements..."
                   className="w-full bg-white border border-black/10 rounded-xl px-5 py-4 text-[15px] text-[#0A0A0A] font-medium placeholder:text-[#aaa] focus:outline-none focus:border-[var(--accent-yellow)] focus:ring-2 focus:ring-[var(--accent-yellow)]/20 transition-all resize-none"
                 />
@@ -267,6 +272,7 @@ export default function EnquirySection() {
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
                 title="ELESPA HEV Office Location — Hadapsar, Pune"
+                suppressHydrationWarning
               />
             </div>
           </motion.div>

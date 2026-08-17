@@ -33,6 +33,9 @@ export default function EcosystemGrid() {
   const gridRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
+    // Register ScrollTrigger in this component's context before use
+    gsap.registerPlugin(ScrollTrigger);
+
     if (gridRef.current) {
       const cards = gridRef.current.children;
       gsap.fromTo(

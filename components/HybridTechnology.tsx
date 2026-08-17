@@ -347,6 +347,10 @@ export default function HybridTechnology() {
                       x2={x}
                       y2={y}
                       strokeWidth="0.3"
+                      initial={{
+                        stroke: isActive ? mode.accent : "rgba(255,255,255,0.05)",
+                        opacity: isActive ? 0.5 : 0.15,
+                      }}
                       animate={{
                         stroke: isActive ? mode.accent : "rgba(255,255,255,0.05)",
                         opacity: isActive ? 0.5 : 0.15,

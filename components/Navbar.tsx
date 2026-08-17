@@ -130,6 +130,7 @@ export default function Navbar() {
                 {activeLink === link.label && (
                   <motion.div
                     layoutId="activeNavIndicator"
+                    initial={{ opacity: 1 }}
                     className="absolute bottom-0 left-0 right-0 h-[1.5px] bg-[var(--accent-yellow)]"
                     transition={{ type: "spring", stiffness: 300, damping: 30 }}
                   />
