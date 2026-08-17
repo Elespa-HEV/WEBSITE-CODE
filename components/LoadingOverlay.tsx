@@ -7,104 +7,158 @@ import { useEffect, useRef, useState } from "react";
  *
  * Full-screen intro video overlay shown on initial page load.
  *
- * Dismissal requires BOTH:
- *   1. videoPlayingRef  — the `playing` event has fired (browser is rendering frames)
- *   2. domReadyRef      — window `load` event has fired (all resources loaded)
+ * Dismissal gate (BOTH required):
+ *   1. videoPlayingRef  — the `playing` event has fired at least once.
+ *   2. domReadyRef      — window `load` event has fired.
  *
- * This guarantees the video is ALWAYS visibly playing before the overlay fades.
+ * Fade timing:
+ *   - The fade does NOT start immediately when both conditions become true.
+ *   - Instead, it waits until the video's currentTime reaches
+ *     (duration - FADE_LEAD_S) in the CURRENT cycle.
+ *   - This ensures:
+ *       a) The video is always visibly shown.
+ *       b) The fade completes before the loop seam is visible.
+ *   - If the website isn't ready when that window first arrives, the video
+ *     loops normally and tries again on the next cycle.
  *
- * Safety fallback: if video errors or 10 s elapse, overlay is force-removed.
+ * Safety fallback: force-remove after 10 s in case of any stuck state.
  */
+
+/** How many seconds before the video end to start the fade. */
+const FADE_LEAD_S = 0.25;
+/** Duration of the CSS fade-out in ms (must match the transition below). */
+const FADE_DURATION_MS = 700;
+
 export default function LoadingOverlay() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [visible, setVisible] = useState(true);
   const [fading, setFading] = useState(false);
 
-  // Use refs so event handlers always see the latest values without stale closures
-  const videoPlayingRef = useRef(false); // true once 'playing' event fires
-  const domReadyRef = useRef(false);     // true once window 'load' fires
-  const dismissedRef = useRef(false);    // guard: only dismiss once
+  const videoPlayingRef = useRef(false); // true once 'playing' fires
+  const domReadyRef     = useRef(false); // true once window 'load' fires
+  const dismissedRef    = useRef(false); // guard: only dismiss once
 
-  // Attempt dismiss — only proceeds when BOTH conditions are met
-  const tryDismiss = () => {
+  /**
+   * Begin the exit transition. Called only from timeupdate (or fallback).
+   * Both gate flags must be true before this runs.
+   */
+  const beginFade = () => {
     if (dismissedRef.current) return;
-    if (!videoPlayingRef.current) return; // video must be actively playing
-    if (!domReadyRef.current) return;     // website must be fully loaded
-
     dismissedRef.current = true;
     setFading(true);
-    // Unmount after fade transition completes (matches 0.85 s CSS transition)
-    setTimeout(() => setVisible(false), 900);
+    setTimeout(() => setVisible(false), FADE_DURATION_MS + 50);
   };
 
   useEffect(() => {
     // ── 1. DOM / website readiness ────────────────────────────────────────
-    //    Use window 'load' (fires when ALL resources finish loading) rather
-    //    than readyState 'interactive' (fires immediately after HTML parse).
-    //    This ensures the visible website is fully initialized before we fade.
     const onWindowLoad = () => {
       domReadyRef.current = true;
-      tryDismiss();
+      // Do NOT call beginFade here — the timeupdate loop gates the timing.
     };
 
     if (document.readyState === "complete") {
-      // Already loaded before this effect ran
       domReadyRef.current = true;
-      // Don't call tryDismiss here — let the video readiness gate it
+      // Intentionally NOT triggering fade here.
+      // timeupdate will pick it up on the next eligible frame.
     } else {
       window.addEventListener("load", onWindowLoad, { once: true });
     }
 
-    // ── 2. Video readiness ────────────────────────────────────────────────
-    //    'playing' is the authoritative event that the browser is actually
-    //    rendering video frames. It fires after buffering, decode, and the
-    //    first frame is painted — not just when metadata is available.
+    // ── 2. Video events ───────────────────────────────────────────────────
     const video = videoRef.current;
     if (!video) {
       // No video element — fail safe
-      domReadyRef.current = true;
       dismissedRef.current = true;
       setFading(true);
-      setTimeout(() => setVisible(false), 900);
+      setTimeout(() => setVisible(false), FADE_DURATION_MS + 50);
       return;
     }
 
+    /**
+     * 'playing' fires when the browser begins rendering the first real frame.
+     * This is the authoritative "video is actually visible" signal.
+     */
     const onPlaying = () => {
-      // Video is genuinely playing — first-play requirement is now satisfied
       videoPlayingRef.current = true;
-      tryDismiss();
+      // Do NOT call beginFade here — defer to timeupdate for timing control.
     };
 
-    const onError = () => {
-      // Video failed — never trap the user behind a broken loading screen
-      if (!dismissedRef.current) {
-        dismissedRef.current = true;
-        setFading(true);
-        setTimeout(() => setVisible(false), 900);
+    /**
+     * timeupdate fires several times per second during playback.
+     * We use it to watch for the fade window: the last FADE_LEAD_S seconds
+     * of each video cycle.
+     *
+     * Gate:   videoPlayingRef AND domReadyRef must both be true.
+     * Timing: currentTime >= duration - FADE_LEAD_S
+     *
+     * If the website isn't ready on the first cycle, the video loops and
+     * this check runs again on subsequent cycles.
+     */
+    const onTimeUpdate = () => {
+      if (dismissedRef.current) return;
+      if (!videoPlayingRef.current) return;
+      if (!domReadyRef.current) return;
+
+      const dur = video.duration;
+      if (!dur || !isFinite(dur)) return; // metadata not yet loaded
+
+      if (video.currentTime >= dur - FADE_LEAD_S) {
+        beginFade();
       }
     };
 
-    video.addEventListener("playing", onPlaying);
-    video.addEventListener("error", onError);
+    /**
+     * 'ended' fires when the video reaches its end (only if loop is false).
+     * We removed the `loop` attribute from JSX and handle looping manually
+     * so we can intercept each cycle end and decide: fade or re-loop.
+     *
+     * NOTE: With loop=false, if both conditions are already met when 'ended'
+     * fires (as a safety net in case timeupdate missed the window), we fade.
+     * Otherwise we restart the video to loop it.
+     */
+    const onEnded = () => {
+      if (dismissedRef.current) return;
+      if (videoPlayingRef.current && domReadyRef.current) {
+        // Both ready — fade (timeupdate should have caught this, but just in case)
+        beginFade();
+      } else {
+        // Website not ready yet — loop manually
+        video.currentTime = 0;
+        video.play().catch(() => { /* ignore */ });
+      }
+    };
+
+    const onError = () => {
+      if (!dismissedRef.current) {
+        dismissedRef.current = true;
+        setFading(true);
+        setTimeout(() => setVisible(false), FADE_DURATION_MS + 50);
+      }
+    };
+
+    video.addEventListener("playing",    onPlaying);
+    video.addEventListener("timeupdate", onTimeUpdate);
+    video.addEventListener("ended",      onEnded);
+    video.addEventListener("error",      onError);
 
     // ── 3. Hard safety fallback — 10 s maximum ───────────────────────────
-    //    Prevents a permanently stuck loading screen on unusual devices.
     const fallbackTimer = setTimeout(() => {
       if (!dismissedRef.current) {
         dismissedRef.current = true;
         setFading(true);
-        setTimeout(() => setVisible(false), 900);
+        setTimeout(() => setVisible(false), FADE_DURATION_MS + 50);
       }
     }, 10_000);
 
-    // Trigger playback — muted autoplay is allowed by all browsers.
-    // If somehow blocked (e.g., strict policies), treat as an error.
+    // Trigger playback. Muted autoplay is permitted by all modern browsers.
     video.play().catch(() => onError());
 
     return () => {
       window.removeEventListener("load", onWindowLoad);
-      video.removeEventListener("playing", onPlaying);
-      video.removeEventListener("error", onError);
+      video.removeEventListener("playing",    onPlaying);
+      video.removeEventListener("timeupdate", onTimeUpdate);
+      video.removeEventListener("ended",      onEnded);
+      video.removeEventListener("error",      onError);
       clearTimeout(fallbackTimer);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -116,38 +170,36 @@ export default function LoadingOverlay() {
     <div
       aria-hidden="true"
       style={{
-        // Fixed overlay sits above the entire website
-        position: "fixed",
-        inset: 0,
-        zIndex: 9999,
-        background: "#000",
-        // Fade transition: only applied once fading starts (avoids initial flicker)
-        opacity: fading ? 0 : 1,
-        transition: fading ? "opacity 0.85s cubic-bezier(0.4, 0, 0.2, 1)" : "none",
-        // Allow website events through only after fade is complete
+        position:      "fixed",
+        inset:         0,
+        zIndex:        9999,
+        background:    "#000",
+        opacity:       fading ? 0 : 1,
+        transition:    fading ? `opacity ${FADE_DURATION_MS}ms cubic-bezier(0.4, 0, 0.2, 1)` : "none",
         pointerEvents: fading ? "none" : "all",
-        overflow: "hidden",
-        // Center the video within the black overlay
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
+        overflow:      "hidden",
+        display:       "flex",
+        alignItems:    "center",
+        justifyContent:"center",
       }}
     >
+      {/*
+        loop is intentionally REMOVED.
+        We handle looping manually in `onEnded` so we can intercept each
+        cycle end and start the fade instead of looping when the site is ready.
+      */}
       <video
         ref={videoRef}
         src="/assets/loading-intro.mp4"
         muted
         autoPlay
-        loop
         playsInline
         style={{
-          // 'contain' shows the FULL video frame without cropping.
-          // The overlay background (#000) fills any letterbox/pillarbox areas.
-          width: "100%",
-          height: "100%",
-          objectFit: "contain",
+          width:          "100%",
+          height:         "100%",
+          objectFit:      "contain",
           objectPosition: "center",
-          display: "block",
+          display:        "block",
         }}
       />
     </div>
