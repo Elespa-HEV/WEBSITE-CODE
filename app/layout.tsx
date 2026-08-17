@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Syncopate } from "next/font/google";
 import "./globals.css";
 import LenisProvider from "@/lib/lenis-provider";
+import LoadingOverlay from "@/components/LoadingOverlay";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -35,6 +36,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${syncopate.variable} antialiased`}>
       <body className="min-h-full flex flex-col">
+        <LoadingOverlay />
         <LenisProvider>{children}</LenisProvider>
       </body>
     </html>

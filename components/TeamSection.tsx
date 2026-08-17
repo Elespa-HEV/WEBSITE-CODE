@@ -26,6 +26,21 @@ const directors = [
     shortBio: "BE Civil Engineer with 20+ years in large-scale project execution. Former Kumar Properties, Kolte Patil, DSK Developers.",
     fullBio: `BE Civil engineer with 20+ years of experience in large-scale project execution and infrastructure development. He has worked with reputed organizations such as Kumar Properties, Kolte Patil Developers, and DSK Developers, delivering complex residential and commercial projects. At ELESPA HEV, his role will be instrumental in building scalable manufacturing infrastructure, streamlining operations, and executing large-scale deployment strategies. His deep understanding of execution dynamics, vendor coordination, and on-ground project management will significantly strengthen our transition from prototype development to mass manufacturing.`,
   },
+  {
+    // ── NEW TEAM MEMBER ──────────────────────────────────────────────────────
+    name: "Gaurav Pardeshi",
+    role: "Chief Technical Officer (CTO)",
+    photo: "/assets/gaurav_pardeshi.jpeg",
+    shortBio: "B.E. Automobile Engineer & Automotive/Product Design professional with 4+ years in automotive engineering, product design, development, prototyping, and R&D.",
+    fullBio: `A B.E. Automobile Engineer and Automotive/Product Design professional with 4+ years of industry experience in automotive engineering, product design, development, prototyping, and research & development. His professional experience involves translating engineering concepts into practical products through a combination of design, technical analysis, prototyping, testing, and continuous refinement.
+
+With a strong foundation in automobile engineering and hands-on experience in product development, he brings a practical and solution-oriented approach to developing new technologies and improving existing products. His interests extend across automotive innovation, mechanical systems, rapid prototyping, 3D printing, automation, and emerging technologies.
+
+At Elespa, he is responsible for contributing to the company's technical and product-development strategy, evaluating new concepts, guiding engineering and R&D activities, and helping transform innovative ideas into technically viable and market-ready solutions.
+
+His vision is to bridge the gap between engineering innovation and real-world application by developing products that are practical, efficient, scalable, and capable of creating meaningful impact.`,
+    // ────────────────────────────────────────────────────────────────────────
+  },
 ];
 
 export default function TeamSection() {
@@ -71,12 +86,12 @@ export default function TeamSection() {
             transition={{ delay: 0.2 }}
             className="text-white/50 text-[16px] max-w-lg mx-auto leading-relaxed"
           >
-            Three directors driving India&apos;s hybrid mobility revolution with decades of combined expertise.
+            Four leaders driving India&apos;s hybrid mobility revolution with decades of combined expertise.
           </motion.p>
         </div>
 
         {/* Director Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-4xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 max-w-[1200px] mx-auto">
           {directors.map((director, i) => (
             <motion.div
               key={director.name}
